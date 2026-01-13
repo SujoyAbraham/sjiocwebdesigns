@@ -351,6 +351,78 @@
             box-shadow: 0 12px 35px rgba(251, 209, 6, 0.6);
         }
 
+        .chatbot-modal {
+            display: none;
+            position: fixed;
+            bottom: 125px;
+            right: 40px;
+            width: 400px;
+            height: 600px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            z-index: 9998;
+            overflow: hidden;
+            border: 3px solid var(--yellow-primary);
+        }
+
+        .chatbot-modal.active {
+            display: block;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        .chatbot-header {
+            background: var(--charcoal);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid var(--yellow-primary);
+        }
+
+        .chatbot-header h3 {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .chatbot-close {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+
+        .chatbot-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .chatbot-iframe {
+            width: 100%;
+            height: calc(100% - 60px);
+            border: none;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
 
         @media (max-width: 768px) {
             .hero-title {
@@ -395,6 +467,13 @@
                 width: 60px;
                 height: 60px;
                 font-size: 1.8rem;
+            }
+
+            .chatbot-modal {
+                width: calc(100% - 40px);
+                right: 20px;
+                bottom: 100px;
+                height: 500px;
             }
         }
 
@@ -548,7 +627,34 @@
     </footer>
 
     <div class="chatbot-float">
-        <div class="chatbot-btn" role="button" aria-label="Member Lookup and Car Plate Search Chatbot">💬</div>
+        <div class="chatbot-btn" onclick="toggleChatbot()" role="button" aria-label="Member Lookup and Car Plate Search Chatbot">💬</div>
     </div>
+
+    <div id="chatbot-modal" class="chatbot-modal">
+        <div class="chatbot-header">
+            <h3>Member Lookup</h3>
+            <button class="chatbot-close" onclick="toggleChatbot()">&times;</button>
+        </div>
+        <iframe class="chatbot-iframe" src="https://sjioc-car-lookup.vercel.app/" title="SJIOC Member Lookup Chatbot"></iframe>
+    </div>
+
+    <script>
+        function toggleChatbot() {
+            const modal = document.getElementById('chatbot-modal');
+            modal.classList.toggle('active');
+        }
+
+        // Close chatbot when clicking outside
+        document.addEventListener('click', function(event) {
+            const modal = document.getElementById('chatbot-modal');
+            const trigger = document.querySelector('.chatbot-btn');
+
+            if (modal.classList.contains('active') &&
+                !modal.contains(event.target) &&
+                !trigger.contains(event.target)) {
+                modal.classList.remove('active');
+            }
+        });
+    </script>
 </body>
 </html>
