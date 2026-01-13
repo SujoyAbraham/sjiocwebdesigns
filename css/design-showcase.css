@@ -1,0 +1,440 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+    color: #333;
+    line-height: 1.6;
+}
+
+.showcase-header {
+    background: linear-gradient(135deg, #800020 0%, #a0002a 100%);
+    color: white;
+    text-align: center;
+    padding: 3rem 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.showcase-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.showcase-header .subtitle {
+    font-size: 1.2rem;
+    opacity: 0.95;
+    margin-bottom: 0.5rem;
+}
+
+.showcase-header .instructions {
+    font-size: 0.95rem;
+    opacity: 0.85;
+    font-style: italic;
+}
+
+.options-grid {
+    max-width: 1400px;
+    margin: 3rem auto;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    gap: 2.5rem;
+}
+
+.option-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.option-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(128, 0, 32, 0.2);
+}
+
+.option-preview {
+    height: 400px;
+    position: relative;
+    border-bottom: 3px solid #800020;
+}
+
+.option-info {
+    padding: 2rem;
+}
+
+.option-info h3 {
+    color: #800020;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.option-info ul {
+    list-style: none;
+    margin-bottom: 1.5rem;
+}
+
+.option-info ul li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.option-info ul li:last-child {
+    border-bottom: none;
+}
+
+.option-info ul li strong {
+    color: #800020;
+}
+
+.view-btn {
+    width: 100%;
+    padding: 1rem;
+    background: #800020;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.view-btn:hover {
+    background: #a0002a;
+}
+
+/* Option 1: Classic Elegance Preview */
+.classic-preview {
+    background: linear-gradient(to bottom, #fff5e6 0%, #ffffff 100%);
+}
+
+.classic-preview .mini-nav {
+    background: #800020;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    font-weight: 600;
+}
+
+.classic-preview .mini-hero {
+    background: linear-gradient(135deg, #800020 0%, #5a0016 100%);
+    color: white;
+    padding: 3rem 2rem;
+    text-align: center;
+}
+
+.classic-preview .cross-icon {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+}
+
+.classic-preview .mini-hero h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.classic-preview .mini-sections {
+    padding: 2rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.classic-preview .mini-card {
+    width: 80px;
+    height: 80px;
+    background: white;
+    border: 2px solid #d4af37;
+    border-radius: 8px;
+}
+
+/* Option 2: Modern Minimalist Preview */
+.modern-preview {
+    background: #ffffff;
+}
+
+.modern-preview .mini-nav-modern {
+    background: transparent;
+    color: #800020;
+    padding: 1rem;
+    font-weight: 700;
+    font-size: 1.5rem;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.modern-preview .mini-hero-modern {
+    padding: 4rem 2rem;
+    text-align: left;
+    padding-left: 3rem;
+}
+
+.modern-preview .mini-hero-modern h2 {
+    font-size: 3rem;
+    color: #800020;
+    font-weight: 300;
+}
+
+.modern-preview .modern-line {
+    width: 100px;
+    height: 3px;
+    background: #800020;
+    margin-top: 1rem;
+}
+
+.modern-preview .mini-grid {
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.modern-preview .grid-item {
+    height: 60px;
+    background: #f8f8f8;
+    border-left: 3px solid #800020;
+}
+
+/* Option 3: Warm Community Preview */
+.warm-preview {
+    background: linear-gradient(135deg, #fff8f0 0%, #ffe6d9 100%);
+}
+
+.warm-preview .mini-nav-warm {
+    background: rgba(128, 0, 32, 0.95);
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    font-weight: 600;
+}
+
+.warm-preview .mini-hero-warm {
+    height: 180px;
+    background: linear-gradient(rgba(128, 0, 32, 0.6), rgba(128, 0, 32, 0.6)),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect fill="%23d4af37" width="100" height="100"/></svg>');
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.warm-preview .warm-overlay h2 {
+    color: white;
+    font-size: 2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.warm-preview .mini-sections-warm {
+    padding: 2rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.warm-preview .warm-card {
+    flex: 1;
+    height: 100px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Option 4: Orthodox Heritage Preview */
+.heritage-preview {
+    background: linear-gradient(to bottom, #fdf8f3 0%, #f5e6d3 100%);
+}
+
+.heritage-preview .mini-nav-heritage {
+    background: #800020;
+    color: #d4af37;
+    padding: 1rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    border-bottom: 3px solid #d4af37;
+}
+
+.heritage-preview .heritage-icon {
+    font-size: 1.5rem;
+}
+
+.heritage-preview .mini-hero-heritage {
+    padding: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.heritage-preview .ornate-border {
+    border: 3px solid #800020;
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    background: white;
+    box-shadow: inset 0 0 20px rgba(212, 175, 55, 0.2);
+}
+
+.heritage-preview .ornate-border h2 {
+    color: #800020;
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.heritage-preview .ornate-border p {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.heritage-preview .mini-sections-heritage {
+    padding: 1.5rem;
+    display: flex;
+    gap: 0.8rem;
+    justify-content: center;
+}
+
+.heritage-preview .heritage-card {
+    width: 70px;
+    height: 70px;
+    background: white;
+    border: 2px solid #d4af37;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Chatbot Indicators */
+.chatbot-indicator,
+.chatbot-indicator-warm {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    background: #800020;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.chatbot-indicator-warm {
+    background: #ff6b35;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+}
+
+.modal-content {
+    position: relative;
+    margin: 2% auto;
+    width: 90%;
+    height: 90%;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    color: white;
+    background: #800020;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 10000;
+    transition: background 0.3s;
+}
+
+.close-btn:hover {
+    background: #a0002a;
+}
+
+#design-frame {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Committee Notes */
+.committee-notes {
+    max-width: 1400px;
+    margin: 4rem auto;
+    padding: 0 2rem 4rem 2rem;
+}
+
+.committee-notes h2 {
+    text-align: center;
+    color: #800020;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}
+
+.notes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.note-section {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-top: 4px solid #800020;
+}
+
+.note-section h3 {
+    color: #800020;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.note-section p {
+    color: #666;
+    line-height: 1.8;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .options-grid {
+        grid-template-columns: 1fr;
+        padding: 0 1rem;
+    }
+
+    .showcase-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .option-preview {
+        height: 300px;
+    }
+
+    .modal-content {
+        width: 95%;
+        height: 85%;
+    }
+}
