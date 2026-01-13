@@ -926,18 +926,15 @@
 
     <div id="chatbot-modal" class="chatbot-modal">
         <div class="chatbot-header">
-            <h3>🚗 Chat with SJIOC Bot</h3>
+            <h3>SJIOC HelpHub</h3>
             <button class="chatbot-close" onclick="toggleChatbot()">&times;</button>
         </div>
-        <iframe class="chatbot-iframe" src="about:blank" data-src="https://sjioc-car-lookup.vercel.app/" title="SJIOC Member Lookup Chatbot" allow="clipboard-read; clipboard-write"></iframe>
+        <iframe class="chatbot-iframe" src="https://sjioc-car-lookup.vercel.app/" title="SJIOC Member Lookup Chatbot"></iframe>
     </div>
 
     <script>
-        let chatbotLoaded = false;
-
         function toggleChatbot() {
             const modal = document.getElementById('chatbot-modal');
-            const iframe = modal.querySelector('.chatbot-iframe');
             const body = document.body;
 
             modal.classList.toggle('active');
@@ -945,12 +942,6 @@
             if (modal.classList.contains('active')) {
                 // Prevent body scroll
                 body.classList.add('modal-open');
-
-                // Load iframe content on first open
-                if (!chatbotLoaded) {
-                    iframe.src = iframe.getAttribute('data-src');
-                    chatbotLoaded = true;
-                }
             } else {
                 // Restore body scroll
                 body.classList.remove('modal-open');
