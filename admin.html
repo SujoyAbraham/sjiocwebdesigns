@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SJIOC Admin Panel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            color: #800020;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        /* Login Form */
+        .login-container {
+            max-width: 400px;
+            margin: 4rem auto;
+            background: white;
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-container h2 {
+            color: #800020;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #800020;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 1rem;
+            background: #800020;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #a0002a;
+        }
+
+        .btn-secondary {
+            background: #d4af37;
+            color: #333;
+        }
+
+        .btn-secondary:hover {
+            background: #e0c050;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            padding: 0.5rem 1rem;
+            width: auto;
+        }
+
+        .btn-danger:hover {
+            background: #c82333;
+        }
+
+        /* Dashboard */
+        .dashboard {
+            display: none;
+        }
+
+        .dashboard.active {
+            display: block;
+        }
+
+        .logout-btn {
+            float: right;
+            padding: 0.75rem 2rem;
+            background: #800020;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .logout-btn:hover {
+            background: #a0002a;
+        }
+
+        .section {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 2rem;
+        }
+
+        .section h2 {
+            color: #800020;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid #d4af37;
+        }
+
+        .alert {
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .alert.show {
+            display: block;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        table th, table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        table th {
+            background: #f8f8f8;
+            color: #800020;
+            font-weight: 600;
+        }
+
+        table tr:hover {
+            background: #f8f8f8;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .calendar-item {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .calendar-item h4 {
+            color: #800020;
+            margin-bottom: 0.5rem;
+        }
+
+        .calendar-item img {
+            width: 100%;
+            max-height: 150px;
+            object-fit: contain;
+            margin: 0.5rem 0;
+        }
+
+        .inline-form {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .inline-form input, .inline-form select {
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .inline-form button {
+            padding: 0.75rem 1.5rem;
+            background: #800020;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .inline-form button:hover {
+            background: #a0002a;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            .login-container {
+                padding: 2rem;
+            }
+
+            .logout-btn {
+                float: none;
+                display: block;
+                width: 100%;
+                margin-bottom: 1rem;
+            }
+
+            table {
+                font-size: 0.9rem;
+            }
+
+            .inline-form {
+                flex-direction: column;
+            }
+
+            .inline-form input, .inline-form select {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Form -->
+    <div id="loginContainer" class="login-container">
+        <h2>SJIOC Admin Login</h2>
+        <div id="loginAlert" class="alert"></div>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" required>
+            </div>
+            <button type="submit" class="btn">Login</button>
+        </form>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashboard" class="dashboard container">
+        <div class="header">
+            <button class="logout-btn" onclick="logout()">Logout</button>
+            <h1>SJIOC Admin Dashboard</h1>
+            <p>Content Management System</p>
+        </div>
+
+        <div id="dashboardAlert" class="alert"></div>
+
+        <!-- Calendar Management -->
+        <div class="section">
+            <h2>Calendar Management</h2>
+            <p style="color: #666; margin-bottom: 1rem;">Upload calendar image URLs (use Google Drive or any image hosting service)</p>
+
+            <div class="inline-form">
+                <select id="calendarMonth">
+                    <option value="01">January</option>
+                    <option value="02">February</option>
+                    <option value="03">March</option>
+                    <option value="04">April</option>
+                    <option value="05">May</option>
+                    <option value="06">June</option>
+                    <option value="07">July</option>
+                    <option value="08">August</option>
+                    <option value="09">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </select>
+                <select id="calendarYear"></select>
+                <input type="url" id="calendarUrl" placeholder="Calendar image URL" required>
+                <button onclick="addCalendar()">Add Calendar</button>
+            </div>
+
+            <div id="calendarList" class="calendar-grid"></div>
+        </div>
+
+        <!-- Worship Schedule -->
+        <div class="section">
+            <h2>Worship Schedule</h2>
+
+            <div class="inline-form">
+                <input type="text" id="worshipName" placeholder="Service name" required>
+                <input type="text" id="worshipDay" placeholder="Day" required>
+                <input type="text" id="worshipTime" placeholder="Time" required>
+                <button onclick="addWorship()">Add Service</button>
+            </div>
+
+            <table id="worshipTable">
+                <thead>
+                    <tr>
+                        <th>Service Name</th>
+                        <th>Day</th>
+                        <th>Time</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+        <!-- Ministry Times -->
+        <div class="section">
+            <h2>Ministry Times</h2>
+
+            <div class="inline-form">
+                <input type="text" id="ministryName" placeholder="Ministry name" required>
+                <input type="text" id="ministryDay" placeholder="Day" required>
+                <input type="text" id="ministryTime" placeholder="Time" required>
+                <button onclick="addMinistry()">Add Ministry</button>
+            </div>
+
+            <table id="ministryTable">
+                <thead>
+                    <tr>
+                        <th>Ministry Name</th>
+                        <th>Day</th>
+                        <th>Time</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuth();
+            populateYears();
+            setCurrentMonth();
+        });
+
+        // Authentication
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (username === 'admin' && password === 'admin') {
+                localStorage.setItem('adminAuth', JSON.stringify({
+                    isLoggedIn: true,
+                    lastLogin: new Date().toISOString()
+                }));
+                showDashboard();
+            } else {
+                showAlert('loginAlert', 'Invalid username or password', 'error');
+            }
+        });
+
+        function checkAuth() {
+            const auth = JSON.parse(localStorage.getItem('adminAuth') || '{}');
+            if (auth.isLoggedIn) {
+                showDashboard();
+            }
+        }
+
+        function showDashboard() {
+            document.getElementById('loginContainer').style.display = 'none';
+            document.getElementById('dashboard').classList.add('active');
+            loadAllData();
+        }
+
+        function logout() {
+            localStorage.removeItem('adminAuth');
+            document.getElementById('loginContainer').style.display = 'block';
+            document.getElementById('dashboard').classList.remove('active');
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+        }
+
+        // Alert function
+        function showAlert(elementId, message, type) {
+            const alert = document.getElementById(elementId);
+            alert.className = `alert alert-${type === 'error' ? 'error' : 'success'} show`;
+            alert.textContent = message;
+            setTimeout(() => alert.classList.remove('show'), 3000);
+        }
+
+        // Populate years
+        function populateYears() {
+            const yearSelect = document.getElementById('calendarYear');
+            const currentYear = new Date().getFullYear();
+            for (let year = currentYear - 1; year <= currentYear + 2; year++) {
+                const option = document.createElement('option');
+                option.value = year;
+                option.textContent = year;
+                if (year === currentYear) option.selected = true;
+                yearSelect.appendChild(option);
+            }
+        }
+
+        function setCurrentMonth() {
+            const month = String(new Date().getMonth() + 1).padStart(2, '0');
+            document.getElementById('calendarMonth').value = month;
+        }
+
+        // Calendar Management
+        function addCalendar() {
+            const month = document.getElementById('calendarMonth').value;
+            const year = document.getElementById('calendarYear').value;
+            const url = document.getElementById('calendarUrl').value;
+
+            if (!url) {
+                showAlert('dashboardAlert', 'Please enter a calendar URL', 'error');
+                return;
+            }
+
+            const calendarData = JSON.parse(localStorage.getItem('calendarData') || '{}');
+            const key = `${year}-${month}`;
+            calendarData[key] = url;
+            localStorage.setItem('calendarData', JSON.stringify(calendarData));
+
+            document.getElementById('calendarUrl').value = '';
+            loadCalendars();
+            showAlert('dashboardAlert', 'Calendar added successfully!', 'success');
+        }
+
+        function loadCalendars() {
+            const calendarData = JSON.parse(localStorage.getItem('calendarData') || '{}');
+            const container = document.getElementById('calendarList');
+            container.innerHTML = '';
+
+            const sortedKeys = Object.keys(calendarData).sort().reverse();
+
+            sortedKeys.forEach(key => {
+                const [year, month] = key.split('-');
+                const monthName = new Date(year, month - 1).toLocaleString('default', { month: 'long' });
+
+                const item = document.createElement('div');
+                item.className = 'calendar-item';
+                item.innerHTML = `
+                    <h4>${monthName} ${year}</h4>
+                    <img src="${calendarData[key]}" alt="Calendar" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'100\\' height=\\'100\\'%3E%3Ctext x=\\'50%25\\' y=\\'50%25\\' text-anchor=\\'middle\\' dy=\\'.3em\\' fill=\\'%23999\\'%3ENo Image%3C/text%3E%3C/svg%3E'">
+                    <button class="btn-danger" onclick="deleteCalendar('${key}')">Delete</button>
+                `;
+                container.appendChild(item);
+            });
+
+            if (sortedKeys.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: #999; padding: 2rem;">No calendars uploaded yet</p>';
+            }
+        }
+
+        function deleteCalendar(key) {
+            if (confirm('Are you sure you want to delete this calendar?')) {
+                const calendarData = JSON.parse(localStorage.getItem('calendarData') || '{}');
+                delete calendarData[key];
+                localStorage.setItem('calendarData', JSON.stringify(calendarData));
+                loadCalendars();
+                showAlert('dashboardAlert', 'Calendar deleted successfully!', 'success');
+            }
+        }
+
+        // Worship Schedule
+        function addWorship() {
+            const name = document.getElementById('worshipName').value;
+            const day = document.getElementById('worshipDay').value;
+            const time = document.getElementById('worshipTime').value;
+
+            if (!name || !day || !time) {
+                showAlert('dashboardAlert', 'Please fill all fields', 'error');
+                return;
+            }
+
+            const worshipSchedule = JSON.parse(localStorage.getItem('worshipSchedule') || '[]');
+            worshipSchedule.push({ name, day, time });
+            localStorage.setItem('worshipSchedule', JSON.stringify(worshipSchedule));
+
+            document.getElementById('worshipName').value = '';
+            document.getElementById('worshipDay').value = '';
+            document.getElementById('worshipTime').value = '';
+
+            loadWorship();
+            showAlert('dashboardAlert', 'Service added successfully!', 'success');
+        }
+
+        function loadWorship() {
+            const worshipSchedule = JSON.parse(localStorage.getItem('worshipSchedule') || '[]');
+            const tbody = document.querySelector('#worshipTable tbody');
+            tbody.innerHTML = '';
+
+            worshipSchedule.forEach((item, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${item.name}</td>
+                    <td>${item.day}</td>
+                    <td>${item.time}</td>
+                    <td><button class="btn-danger" onclick="deleteWorship(${index})">Delete</button></td>
+                `;
+                tbody.appendChild(row);
+            });
+
+            if (worshipSchedule.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="4" style="text-align: center; color: #999;">No services added yet</td></tr>';
+            }
+        }
+
+        function deleteWorship(index) {
+            if (confirm('Are you sure you want to delete this service?')) {
+                const worshipSchedule = JSON.parse(localStorage.getItem('worshipSchedule') || '[]');
+                worshipSchedule.splice(index, 1);
+                localStorage.setItem('worshipSchedule', JSON.stringify(worshipSchedule));
+                loadWorship();
+                showAlert('dashboardAlert', 'Service deleted successfully!', 'success');
+            }
+        }
+
+        // Ministry Times
+        function addMinistry() {
+            const name = document.getElementById('ministryName').value;
+            const day = document.getElementById('ministryDay').value;
+            const time = document.getElementById('ministryTime').value;
+
+            if (!name || !day || !time) {
+                showAlert('dashboardAlert', 'Please fill all fields', 'error');
+                return;
+            }
+
+            const ministryTimes = JSON.parse(localStorage.getItem('ministryTimes') || '[]');
+            ministryTimes.push({ name, day, time });
+            localStorage.setItem('ministryTimes', JSON.stringify(ministryTimes));
+
+            document.getElementById('ministryName').value = '';
+            document.getElementById('ministryDay').value = '';
+            document.getElementById('ministryTime').value = '';
+
+            loadMinistry();
+            showAlert('dashboardAlert', 'Ministry added successfully!', 'success');
+        }
+
+        function loadMinistry() {
+            const ministryTimes = JSON.parse(localStorage.getItem('ministryTimes') || '[]');
+            const tbody = document.querySelector('#ministryTable tbody');
+            tbody.innerHTML = '';
+
+            ministryTimes.forEach((item, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${item.name}</td>
+                    <td>${item.day}</td>
+                    <td>${item.time}</td>
+                    <td><button class="btn-danger" onclick="deleteMinistry(${index})">Delete</button></td>
+                `;
+                tbody.appendChild(row);
+            });
+
+            if (ministryTimes.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="4" style="text-align: center; color: #999;">No ministries added yet</td></tr>';
+            }
+        }
+
+        function deleteMinistry(index) {
+            if (confirm('Are you sure you want to delete this ministry?')) {
+                const ministryTimes = JSON.parse(localStorage.getItem('ministryTimes') || '[]');
+                ministryTimes.splice(index, 1);
+                localStorage.setItem('ministryTimes', JSON.stringify(ministryTimes));
+                loadMinistry();
+                showAlert('dashboardAlert', 'Ministry deleted successfully!', 'success');
+            }
+        }
+
+        // Load all data
+        function loadAllData() {
+            loadCalendars();
+            loadWorship();
+            loadMinistry();
+        }
+    </script>
+</body>
+</html>

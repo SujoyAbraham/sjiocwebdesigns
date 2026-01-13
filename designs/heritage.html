@@ -463,6 +463,105 @@
                 height: 60px;
                 font-size: 1.8rem;
             }
+
+            .calendar-header {
+                flex-direction: column;
+                gap: 1.5rem;
+                padding: 1.5rem;
+            }
+
+            .calendar-month-year {
+                font-size: 1.7rem;
+            }
+
+            .calendar-image-container {
+                padding: 1.5rem;
+                min-height: 300px;
+            }
+        }
+
+        /* Calendar Section */
+        .calendar-container {
+            max-width: 1145px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2.5rem;
+            padding: 2rem;
+            background: var(--primary);
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(187, 95, 132, 0.2);
+        }
+
+        .calendar-month-year {
+            color: white;
+            font-size: 2.2rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .calendar-nav-btn {
+            padding: 1rem 2rem;
+            background: white;
+            color: var(--primary);
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .calendar-nav-btn:hover {
+            background: var(--teal);
+            color: white;
+            -webkit-transform: translateY(-2px);
+            -ms-transform: translateY(-2px);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(103, 146, 142, 0.4);
+        }
+
+        .calendar-image-container {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border: 3px solid var(--teal);
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .calendar-image {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .calendar-placeholder {
+            text-align: center;
+            color: #999;
+        }
+
+        .calendar-placeholder p:first-child {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+        }
+
+        .calendar-placeholder p:nth-child(2) {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
         }
 
         @media (max-width: 480px) {
@@ -491,7 +590,8 @@
                 <li><a href="#about" class="nav-link">About</a></li>
                 <li><a href="#services" class="nav-link">Services</a></li>
                 <li><a href="#ministries" class="nav-link">Ministries</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li><a href="#calendar" class="nav-link">Calendar</a></li>
+                <li><a href="/admin.html" class="nav-link">Admin</a></li>
             </ul>
         </nav>
     </header>
@@ -531,7 +631,7 @@
                 <h2 class="section-title">Worship Schedule</h2>
                 <p class="section-subtitle">Join us in prayer and celebration</p>
             </div>
-            <div class="services-grid">
+            <div id="servicesGrid" class="services-grid">
                 <div class="service-card">
                     <div class="service-icon">⛪</div>
                     <h3>Holy Qurbana</h3>
@@ -627,6 +727,29 @@
         </div>
     </section>
 
+    <!-- Calendar Section -->
+    <section id="calendar" class="section">
+        <div class="section-header">
+            <h2 class="section-title">Monthly Calendar</h2>
+            <p class="section-subtitle">Stay updated with church events and activities</p>
+        </div>
+        <div class="calendar-container">
+            <div class="calendar-header">
+                <button class="calendar-nav-btn" onclick="previousMonth()">← Previous</button>
+                <h3 id="calendarMonthYear" class="calendar-month-year"></h3>
+                <button class="calendar-nav-btn" onclick="nextMonth()">Next →</button>
+            </div>
+            <div class="calendar-image-container">
+                <img id="calendarImage" class="calendar-image" src="" alt="Monthly Calendar" style="display: none;">
+                <div id="calendarPlaceholder" class="calendar-placeholder">
+                    <p>📅</p>
+                    <p>No calendar available for this month</p>
+                    <p style="font-size: 0.9rem; opacity: 0.7;">Administrators can upload calendars via the Admin panel</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
@@ -654,6 +777,78 @@
                 `width=${width},height=${height},left=${left},top=${top},resizable=yes,scrollbars=yes,toolbar=no,menubar=no,location=no,status=no`
             );
         }
+
+        // Calendar functionality
+        let currentCalendarDate = new Date();
+
+        function initCalendar() {
+            updateCalendarDisplay();
+        }
+
+        function updateCalendarDisplay() {
+            const year = currentCalendarDate.getFullYear();
+            const month = String(currentCalendarDate.getMonth() + 1).padStart(2, '0');
+            const monthName = currentCalendarDate.toLocaleString('default', { month: 'long' });
+
+            document.getElementById('calendarMonthYear').textContent = `${monthName} ${year}`;
+
+            const calendarData = JSON.parse(localStorage.getItem('calendarData') || '{}');
+            const key = `${year}-${month}`;
+            const calendarUrl = calendarData[key];
+
+            const calendarImage = document.getElementById('calendarImage');
+            const placeholder = document.getElementById('calendarPlaceholder');
+
+            if (calendarUrl) {
+                calendarImage.src = calendarUrl;
+                calendarImage.style.display = 'block';
+                placeholder.style.display = 'none';
+            } else {
+                calendarImage.style.display = 'none';
+                placeholder.style.display = 'block';
+            }
+        }
+
+        function previousMonth() {
+            currentCalendarDate.setMonth(currentCalendarDate.getMonth() - 1);
+            updateCalendarDisplay();
+        }
+
+        function nextMonth() {
+            currentCalendarDate.setMonth(currentCalendarDate.getMonth() + 1);
+            updateCalendarDisplay();
+        }
+
+        // Load worship schedule dynamically
+        function loadWorshipSchedule() {
+            const worshipSchedule = JSON.parse(localStorage.getItem('worshipSchedule') || '[]');
+
+            if (worshipSchedule.length > 0) {
+                const servicesGrid = document.getElementById('servicesGrid');
+                if (servicesGrid) {
+                    servicesGrid.innerHTML = '';
+
+                    worshipSchedule.forEach((service) => {
+                        const card = document.createElement('div');
+                        card.className = 'service-card';
+                        card.innerHTML = `
+                            <div class="service-icon-circle">
+                                <span>⛪</span>
+                            </div>
+                            <h3>${service.name}</h3>
+                            <p class="service-time">${service.day} • ${service.time}</p>
+                        `;
+                        servicesGrid.appendChild(card);
+                    });
+                }
+            }
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            initCalendar();
+            loadWorshipSchedule();
+        });
     </script>
 </body>
 </html>
