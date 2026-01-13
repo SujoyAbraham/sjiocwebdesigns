@@ -414,83 +414,6 @@
             box-shadow: 0 10px 35px rgba(187, 95, 132, 0.5);
         }
 
-        .chatbot-modal {
-            display: none;
-            position: fixed;
-            bottom: 120px;
-            right: 30px;
-            width: 450px;
-            height: 650px;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-            z-index: 9998;
-            overflow: hidden;
-            border: 3px solid var(--teal);
-        }
-
-        .chatbot-modal.active {
-            display: block;
-            animation: slideUp 0.3s ease-out;
-        }
-
-        .chatbot-header {
-            background: var(--primary);
-            color: white;
-            padding: 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 3px solid var(--teal);
-        }
-
-        .chatbot-header h3 {
-            margin: 0;
-            font-size: 1.1rem;
-        }
-
-        .chatbot-close {
-            background: transparent;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: 0;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: background 0.3s;
-        }
-
-        .chatbot-close:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .chatbot-iframe {
-            width: 100%;
-            height: calc(100% - 60px);
-            border: none;
-        }
-
-        body.modal-open {
-            overflow: hidden;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .nav-menu {
@@ -539,14 +462,6 @@
                 width: 60px;
                 height: 60px;
                 font-size: 1.8rem;
-            }
-
-            .chatbot-modal {
-                width: calc(100% - 40px);
-                right: 20px;
-                bottom: 100px;
-                height: 70vh;
-                max-height: 600px;
             }
         }
 
@@ -723,44 +638,22 @@
 
     <!-- Chatbot Widget -->
     <div class="chatbot-widget">
-        <button class="chatbot-button" onclick="toggleChatbot()" aria-label="Member Lookup and Car Plate Search Chatbot">💬</button>
-    </div>
-
-    <div id="chatbot-modal" class="chatbot-modal">
-        <div class="chatbot-header">
-            <h3>SJIOC HelpHub</h3>
-            <button class="chatbot-close" onclick="toggleChatbot()">&times;</button>
-        </div>
-        <iframe class="chatbot-iframe" src="https://sjioc-car-lookup.vercel.app/" title="SJIOC Member Lookup Chatbot"></iframe>
+        <button class="chatbot-button" onclick="openChatbot()" aria-label="Member Lookup and Car Plate Search Chatbot">💬</button>
     </div>
 
     <script>
-        function toggleChatbot() {
-            const modal = document.getElementById('chatbot-modal');
-            const body = document.body;
+        function openChatbot() {
+            const width = 400;
+            const height = 600;
+            const left = (screen.width - width) / 2;
+            const top = (screen.height - height) / 2;
 
-            modal.classList.toggle('active');
-
-            if (modal.classList.contains('active')) {
-                // Prevent body scroll
-                body.classList.add('modal-open');
-            } else {
-                // Restore body scroll
-                body.classList.remove('modal-open');
-            }
+            window.open(
+                'https://sjioc-car-lookup.vercel.app/',
+                'SJIOC HelpHub',
+                `width=${width},height=${height},left=${left},top=${top},resizable=yes,scrollbars=yes,toolbar=no,menubar=no,location=no,status=no`
+            );
         }
-
-        // Close chatbot when clicking outside
-        document.addEventListener('click', function(event) {
-            const modal = document.getElementById('chatbot-modal');
-            const trigger = document.querySelector('.chatbot-button');
-
-            if (modal.classList.contains('active') &&
-                !modal.contains(event.target) &&
-                !trigger.contains(event.target)) {
-                toggleChatbot();
-            }
-        });
     </script>
 </body>
 </html>
