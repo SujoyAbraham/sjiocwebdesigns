@@ -28,13 +28,14 @@
         }
 
         .navbar {
-            background: var(--maroon-primary);
-            padding: 1.2rem 0;
+            background: white;
+            padding: 1rem 0;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            border-bottom: 3px solid var(--gold-accent);
         }
 
         .nav-container {
@@ -50,13 +51,14 @@
             display: flex;
             align-items: center;
             gap: 1rem;
-            color: var(--gold-accent);
+            color: var(--maroon-primary);
             font-size: 1.5rem;
             font-weight: 600;
         }
 
         .nav-brand .cross {
             font-size: 2rem;
+            color: var(--gold-accent);
         }
 
         .nav-menu {
@@ -66,38 +68,43 @@
         }
 
         .nav-link {
-            color: white;
+            color: var(--maroon-primary);
             text-decoration: none;
             font-weight: 500;
             transition: color 0.3s;
             font-size: 1.05rem;
+            position: relative;
         }
 
         .nav-link:hover {
             color: var(--gold-accent);
         }
 
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold-accent);
+            transition: width 0.3s;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
         .hero {
-            background: linear-gradient(135deg, var(--maroon-primary) 0%, var(--maroon-dark) 100%);
+            background: var(--maroon-primary);
             color: white;
-            min-height: 100vh;
+            min-height: 90vh;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             margin-top: 70px;
             position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.2) 100%);
         }
 
         .hero-content {
@@ -107,30 +114,29 @@
         }
 
         .cross-icon {
-            font-size: 5rem;
+            font-size: 4rem;
             color: var(--gold-accent);
             margin-bottom: 1.5rem;
-            animation: fadeIn 1.5s ease-in;
         }
 
         .hero-title {
-            font-size: 4rem;
-            margin-bottom: 1rem;
+            font-size: 3.5rem;
+            margin-bottom: 0.8rem;
             font-weight: 400;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
         }
 
         .hero-subtitle {
-            font-size: 1.8rem;
-            margin-bottom: 0.5rem;
-            font-style: italic;
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
             color: var(--gold-accent);
         }
 
         .hero-tagline {
-            font-size: 1.3rem;
-            margin-bottom: 2.5rem;
-            opacity: 0.95;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            letter-spacing: 3px;
         }
 
         .hero-buttons {
