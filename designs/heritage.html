@@ -419,8 +419,8 @@
             position: fixed;
             bottom: 120px;
             right: 30px;
-            width: 400px;
-            height: 600px;
+            width: 450px;
+            height: 650px;
             background: white;
             border-radius: 12px;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
@@ -473,6 +473,10 @@
             width: 100%;
             height: calc(100% - 60px);
             border: none;
+        }
+
+        body.modal-open {
+            overflow: hidden;
         }
 
         @keyframes slideUp {
@@ -541,7 +545,8 @@
                 width: calc(100% - 40px);
                 right: 20px;
                 bottom: 100px;
-                height: 500px;
+                height: 70vh;
+                max-height: 600px;
             }
         }
 
@@ -723,16 +728,35 @@
 
     <div id="chatbot-modal" class="chatbot-modal">
         <div class="chatbot-header">
-            <h3>Member Lookup</h3>
+            <h3>🚗 Chat with SJIOC Bot</h3>
             <button class="chatbot-close" onclick="toggleChatbot()">&times;</button>
         </div>
-        <iframe class="chatbot-iframe" src="https://sjioc-car-lookup.vercel.app/" title="SJIOC Member Lookup Chatbot"></iframe>
+        <iframe class="chatbot-iframe" src="about:blank" data-src="https://sjioc-car-lookup.vercel.app/" title="SJIOC Member Lookup Chatbot" allow="clipboard-read; clipboard-write"></iframe>
     </div>
 
     <script>
+        let chatbotLoaded = false;
+
         function toggleChatbot() {
             const modal = document.getElementById('chatbot-modal');
+            const iframe = modal.querySelector('.chatbot-iframe');
+            const body = document.body;
+
             modal.classList.toggle('active');
+
+            if (modal.classList.contains('active')) {
+                // Prevent body scroll
+                body.classList.add('modal-open');
+
+                // Load iframe content on first open
+                if (!chatbotLoaded) {
+                    iframe.src = iframe.getAttribute('data-src');
+                    chatbotLoaded = true;
+                }
+            } else {
+                // Restore body scroll
+                body.classList.remove('modal-open');
+            }
         }
 
         // Close chatbot when clicking outside
@@ -743,7 +767,7 @@
             if (modal.classList.contains('active') &&
                 !modal.contains(event.target) &&
                 !trigger.contains(event.target)) {
-                modal.classList.remove('active');
+                toggleChatbot();
             }
         });
     </script>
