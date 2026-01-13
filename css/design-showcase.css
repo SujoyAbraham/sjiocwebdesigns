@@ -155,14 +155,14 @@ body {
     border-radius: 8px;
 }
 
-/* Option 2: Modern Minimalist Preview */
+/* Option 2: Vibrant Modern Preview */
 .modern-preview {
     background: #ffffff;
 }
 
 .modern-preview .mini-nav-modern {
     background: transparent;
-    color: #800020;
+    color: #222222;
     padding: 1rem;
     font-weight: 700;
     font-size: 1.5rem;
@@ -177,14 +177,14 @@ body {
 
 .modern-preview .mini-hero-modern h2 {
     font-size: 3rem;
-    color: #800020;
+    color: #fbd106;
     font-weight: 300;
 }
 
 .modern-preview .modern-line {
     width: 100px;
     height: 3px;
-    background: #800020;
+    background: #fbd106;
     margin-top: 1rem;
 }
 
@@ -197,27 +197,28 @@ body {
 
 .modern-preview .grid-item {
     height: 60px;
-    background: #f8f8f8;
-    border-left: 3px solid #800020;
+    background: #f5f5f5;
+    border-left: 3px solid #fbd106;
 }
 
-/* Option 3: Warm Community Preview */
+/* Option 3: Good Shepherd Inspired Preview */
 .warm-preview {
-    background: linear-gradient(135deg, #fff8f0 0%, #ffe6d9 100%);
+    background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
 }
 
 .warm-preview .mini-nav-warm {
-    background: rgba(128, 0, 32, 0.95);
-    color: white;
+    background: #ffffff;
+    color: #6c3749;
     padding: 1rem;
     text-align: center;
     font-weight: 600;
+    border-bottom: 1px solid #e0e0e0;
 }
 
 .warm-preview .mini-hero-warm {
     height: 180px;
-    background: linear-gradient(rgba(128, 0, 32, 0.6), rgba(128, 0, 32, 0.6)),
-                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect fill="%23d4af37" width="100" height="100"/></svg>');
+    background: linear-gradient(rgba(108, 55, 73, 0.7), rgba(108, 55, 73, 0.7)),
+                linear-gradient(135deg, #6c3749 0%, #5a263a 100%);
     background-size: cover;
     display: flex;
     align-items: center;
@@ -240,18 +241,19 @@ body {
     flex: 1;
     height: 100px;
     background: white;
-    border-radius: 12px;
+    border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-top: 3px solid #e2a241;
 }
 
-/* Option 4: Orthodox Heritage Preview */
+/* Option 4: Mosaic Inspired Preview */
 .heritage-preview {
-    background: linear-gradient(to bottom, #fdf8f3 0%, #f5e6d3 100%);
+    background: linear-gradient(to bottom, #f8f8f8 0%, #ffffff 100%);
 }
 
 .heritage-preview .mini-nav-heritage {
-    background: #800020;
-    color: #d4af37;
+    background: #bb5f84;
+    color: white;
     padding: 1rem;
     text-align: center;
     display: flex;
@@ -259,7 +261,7 @@ body {
     justify-content: center;
     gap: 0.5rem;
     font-weight: 600;
-    border-bottom: 3px solid #d4af37;
+    border-bottom: 3px solid #67928e;
 }
 
 .heritage-preview .heritage-icon {
@@ -274,16 +276,16 @@ body {
 }
 
 .heritage-preview .ornate-border {
-    border: 3px solid #800020;
+    border: 3px solid #bb5f84;
     border-radius: 8px;
     padding: 2rem;
     text-align: center;
     background: white;
-    box-shadow: inset 0 0 20px rgba(212, 175, 55, 0.2);
+    box-shadow: inset 0 0 20px rgba(103, 146, 142, 0.2);
 }
 
 .heritage-preview .ornate-border h2 {
-    color: #800020;
+    color: #bb5f84;
     font-size: 1.8rem;
     margin-bottom: 0.5rem;
 }
@@ -304,7 +306,7 @@ body {
     width: 70px;
     height: 70px;
     background: white;
-    border: 2px solid #d4af37;
+    border: 2px solid #67928e;
     border-radius: 4px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
