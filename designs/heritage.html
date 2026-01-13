@@ -782,7 +782,19 @@
         let currentCalendarDate = new Date();
 
         function initCalendar() {
+            // Initialize default calendar data if not exists
+            initializeDefaultCalendar();
             updateCalendarDisplay();
+        }
+
+        function initializeDefaultCalendar() {
+            const calendarData = JSON.parse(localStorage.getItem('calendarData') || '{}');
+
+            // Add default calendar for January 2026 if not exists
+            if (!calendarData['2026-01']) {
+                calendarData['2026-01'] = 'https://drive.google.com/uc?export=view&id=1j-LW0C4H7Z4upAE0YSYl78dPjPiQpPng';
+                localStorage.setItem('calendarData', JSON.stringify(calendarData));
+            }
         }
 
         function updateCalendarDisplay() {
