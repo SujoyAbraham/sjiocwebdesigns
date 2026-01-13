@@ -418,6 +418,82 @@ body {
     line-height: 1.8;
 }
 
+/* Direct Links Section */
+.direct-links-section {
+    max-width: 1400px;
+    margin: 4rem auto;
+    padding: 3rem 2rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.direct-links-section h2 {
+    text-align: center;
+    color: #800020;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.direct-links-description {
+    text-align: center;
+    color: #666;
+    margin-bottom: 2.5rem;
+    font-size: 1.1rem;
+}
+
+.direct-links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.direct-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, #f8f8f8 0%, #ffffff 100%);
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: all 0.3s;
+    text-align: center;
+}
+
+.direct-link:hover {
+    border-color: #800020;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(128, 0, 32, 0.15);
+}
+
+.direct-link .link-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.direct-link .link-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #800020;
+    margin-bottom: 0.8rem;
+}
+
+.direct-link .link-url {
+    font-size: 0.85rem;
+    color: #666;
+    font-family: 'Courier New', monospace;
+    word-break: break-all;
+}
+
+.direct-link:hover .link-icon {
+    transform: scale(1.1);
+}
+
+.direct-link:hover .link-url {
+    color: #800020;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .options-grid {
@@ -436,5 +512,18 @@ body {
     .modal-content {
         width: 95%;
         height: 85%;
+    }
+
+    .direct-links-section {
+        padding: 2rem 1rem;
+        margin: 3rem 1rem;
+    }
+
+    .direct-links-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .direct-links-section h2 {
+        font-size: 1.5rem;
     }
 }
