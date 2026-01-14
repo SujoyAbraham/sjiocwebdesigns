@@ -654,7 +654,7 @@
                     <button class="calendar-nav-btn" onclick="nextMonth()">Next →</button>
                 </div>
                 <div class="calendar-image-container">
-                    <img id="calendarImage" class="calendar-image" src="" alt="Monthly Calendar" style="display: none;">
+                    <img id="calendarImage" class="calendar-image" src="" alt="Monthly Calendar" style="display: none;" onerror="console.error('Calendar image failed to load:', this.src); this.style.display='none'; document.getElementById('calendarPlaceholder').style.display='block';">
                     <div id="calendarPlaceholder" class="calendar-placeholder">
                         <p>📅</p>
                         <p>No calendar available for this month</p>

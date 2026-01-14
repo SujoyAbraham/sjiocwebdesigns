@@ -672,7 +672,7 @@
                     <button class="calendar-nav-btn" onclick="nextMonth()">Next →</button>
                 </div>
                 <div class="calendar-image-container">
-                    <img id="calendarImage" class="calendar-image" src="" alt="Monthly Calendar" style="display: none;">
+                    <img id="calendarImage" class="calendar-image" src="" alt="Monthly Calendar" style="display: none;" onerror="console.error('Calendar image failed to load:', this.src); this.style.display='none'; document.getElementById('calendarPlaceholder').style.display='block';">
                     <div id="calendarPlaceholder" class="calendar-placeholder">
                         <p>📅</p>
                         <p>No calendar available for this month</p>
@@ -742,14 +742,27 @@
             const key = `${year}-${month}`;
             const calendarUrl = calendarData[key];
 
+            console.log('[Calendar Debug]', {
+                key: key,
+                url: calendarUrl,
+                allData: calendarData
+            });
+
             const calendarImage = document.getElementById('calendarImage');
             const placeholder = document.getElementById('calendarPlaceholder');
 
             if (calendarUrl) {
+                console.log('[Calendar] Setting image src to:', calendarUrl);
                 calendarImage.src = calendarUrl;
                 calendarImage.style.display = 'block';
                 placeholder.style.display = 'none';
+
+                // Add load success handler
+                calendarImage.onload = function() {
+                    console.log('[Calendar] Image loaded successfully!');
+                };
             } else {
+                console.log('[Calendar] No calendar found for', key);
                 calendarImage.style.display = 'none';
                 placeholder.style.display = 'block';
             }
