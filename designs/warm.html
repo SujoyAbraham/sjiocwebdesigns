@@ -4,7 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>St John's Indian Orthodox Church of Delaware Valley</title>
-    <script src="/js/maintenance-check.js"></script>
+    <script>
+        (function() {
+            if (window.location.pathname.includes('maintenance.html')) return;
+            fetch('/api/check-maintenance')
+                .then(res => res.json())
+                .then(data => {
+                    if (data.maintenance === true) {
+                        window.location.replace('/maintenance.html');
+                    }
+                })
+                .catch(err => console.error('Maintenance check failed:', err));
+        })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
