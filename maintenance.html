@@ -4,6 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Under Maintenance - SJIOC</title>
+    <script>
+        // Check if maintenance mode is still active
+        // If not, redirect back to home
+        fetch('/api/check-maintenance')
+            .then(response => response.json())
+            .then(data => {
+                if (data.maintenance === false) {
+                    window.location.replace('/');
+                }
+            })
+            .catch(error => {
+                console.error('Error checking maintenance status:', error);
+            });
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
