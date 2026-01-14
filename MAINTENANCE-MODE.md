@@ -46,26 +46,32 @@ This project includes a maintenance mode system controlled by a Vercel environme
 
 The maintenance mode system uses:
 
-1. **`middleware.js`** - Vercel Edge Middleware that checks the `MAINT_MODE` environment variable
-2. **`maintenance.html`** - The maintenance page visitors see when `MAINT_MODE = Y`
-3. **`vercel.json`** - Normal routing configuration
+1. **`api/check-maintenance.js`** - Serverless API function that reads the `MAINT_MODE` environment variable
+2. **`js/maintenance-check.js`** - Client-side JavaScript that checks the API and redirects if needed
+3. **`maintenance.html`** - The maintenance page visitors see when `MAINT_MODE = Y`
+4. **All HTML pages** - Include the maintenance check script in their `<head>` section
 
 ### Logic Flow:
 ```
 User visits any page
     ↓
-Middleware checks MAINT_MODE env variable
+Page loads maintenance-check.js script
     ↓
-If MAINT_MODE = "Y" → Redirect to /maintenance.html
-If MAINT_MODE = "N" → Allow normal access
+Script calls /api/check-maintenance
+    ↓
+API returns {maintenance: true/false} based on MAINT_MODE env var
+    ↓
+If maintenance = true → Redirect to /maintenance.html
+If maintenance = false → Allow normal page access
 ```
 
 ---
 
 ## Files Explained
 
-- **`middleware.js`** - Edge Middleware that checks environment variable and redirects accordingly
-- **`maintenance.html`** - The maintenance page that visitors see
+- **`api/check-maintenance.js`** - Serverless function that checks MAINT_MODE and returns status
+- **`js/maintenance-check.js`** - Client script that fetches API and redirects to maintenance page
+- **`maintenance.html`** - The maintenance page that visitors see (also checks if mode is disabled)
 - **`vercel.json`** - Normal routing configuration
 - **`vercel.maintenance.json`** - *(Legacy)* Old manual maintenance config
 - **`vercel.normal.json`** - *(Legacy)* Old normal config
