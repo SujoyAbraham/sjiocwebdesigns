@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SJIOC Website Design Options - Committee Review</title>
+    <title>St. John's Indian Orthodox Church</title>
     <script>
         // Maintenance Mode Check - Inline version
         (function() {
@@ -13,221 +13,37 @@
                 .then(data => {
                     if (data.maintenance === true) {
                         window.location.replace('/maintenance.html');
+                    } else {
+                        // Redirect to the Modern design
+                        window.location.replace('/designs/modern.html');
                     }
                 })
-                .catch(err => console.error('Maintenance check failed:', err));
+                .catch(err => {
+                    console.error('Maintenance check failed:', err);
+                    // On error, still redirect to Modern design
+                    window.location.replace('/designs/modern.html');
+                });
         })();
     </script>
-    <link rel="stylesheet" href="/css/design-showcase.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: #f5f5f5;
+        }
+        .loading {
+            text-align: center;
+            color: #666;
+        }
+    </style>
 </head>
 <body>
-    <div class="showcase-header">
-        <h1>St. John's Indian Orthodox Church</h1>
-        <p class="subtitle">Website Design Options for Committee Review</p>
-        <p class="instructions">Click on any design option to view full preview</p>
+    <div class="loading">
+        <p>Loading...</p>
     </div>
-
-    <div class="options-grid">
-        <!-- Option 1: Classic Elegance -->
-        <div class="option-card" data-design="classic">
-            <div class="option-preview classic-preview">
-                <div class="mini-nav">SJIOC</div>
-                <div class="mini-hero">
-                    <div class="cross-icon">✝</div>
-                    <h2>St. John's IOC</h2>
-                    <p>Faith • Fellowship • Service</p>
-                </div>
-                <div class="mini-sections">
-                    <div class="mini-card"></div>
-                    <div class="mini-card"></div>
-                    <div class="mini-card"></div>
-                </div>
-                <div class="chatbot-indicator">💬 Chatbot</div>
-            </div>
-            <div class="option-info">
-                <h3>Option 1: Classic Elegance</h3>
-                <ul>
-                    <li><strong>Style:</strong> Traditional with modern touch</li>
-                    <li><strong>Colors:</strong> Deep maroon, gold accents, cream backgrounds</li>
-                    <li><strong>Layout:</strong> Centered content, symmetrical design</li>
-                    <li><strong>Features:</strong> Large hero with cross, elegant typography</li>
-                    <li><strong>Best for:</strong> Conservative, traditional congregation</li>
-                </ul>
-                <button class="view-btn" onclick="showDesign('classic')">View Full Design</button>
-            </div>
-        </div>
-
-        <!-- Option 2: Vibrant Modern -->
-        <div class="option-card" data-design="modern">
-            <div class="option-preview modern-preview">
-                <div class="mini-nav-modern">SJIOC</div>
-                <div class="mini-hero-modern">
-                    <h2>Welcome</h2>
-                    <div class="modern-line"></div>
-                </div>
-                <div class="mini-grid">
-                    <div class="grid-item"></div>
-                    <div class="grid-item"></div>
-                    <div class="grid-item"></div>
-                    <div class="grid-item"></div>
-                </div>
-                <div class="chatbot-indicator">💬</div>
-            </div>
-            <div class="option-info">
-                <h3>Option 2: Vibrant Modern</h3>
-                <ul>
-                    <li><strong>Style:</strong> Bold, contemporary, energetic</li>
-                    <li><strong>Colors:</strong> Bright yellow accents, charcoal dark, white space</li>
-                    <li><strong>Layout:</strong> Asymmetric grid, card-based design</li>
-                    <li><strong>Features:</strong> Floating chatbot, minimalist icons, strong contrast</li>
-                    <li><strong>Best for:</strong> Modern, active congregation seeking fresh approach</li>
-                </ul>
-                <button class="view-btn" onclick="showDesign('modern')">View Full Design</button>
-            </div>
-        </div>
-
-        <!-- Option 3: Good Shepherd Inspired -->
-        <div class="option-card" data-design="warm">
-            <div class="option-preview warm-preview">
-                <div class="mini-nav-warm">St. John's IOC</div>
-                <div class="mini-hero-warm">
-                    <div class="warm-overlay">
-                        <h2>Our Community</h2>
-                    </div>
-                </div>
-                <div class="mini-sections-warm">
-                    <div class="warm-card"></div>
-                    <div class="warm-card"></div>
-                </div>
-                <div class="chatbot-indicator-warm">Chat with us</div>
-            </div>
-            <div class="option-info">
-                <h3>Option 3: Good Shepherd Inspired</h3>
-                <ul>
-                    <li><strong>Style:</strong> Elegant, traditional, warm</li>
-                    <li><strong>Colors:</strong> Deep burgundy (#6c3749), gold accent (#e2a241)</li>
-                    <li><strong>Layout:</strong> CGS Online inspired, serif headings, rounded buttons</li>
-                    <li><strong>Features:</strong> Playfair Display headings, comprehensive footer, social links</li>
-                    <li><strong>Best for:</strong> Traditional congregation seeking warm elegance</li>
-                </ul>
-                <button class="view-btn" onclick="showDesign('warm')">View Full Design</button>
-            </div>
-        </div>
-
-        <!-- Option 4: Mosaic Inspired -->
-        <div class="option-card" data-design="heritage">
-            <div class="option-preview heritage-preview">
-                <div class="mini-nav-heritage">
-                    <div class="heritage-icon">☦</div>
-                    <span>SJIOC</span>
-                </div>
-                <div class="mini-hero-heritage">
-                    <div class="ornate-border">
-                        <h2>St. John's</h2>
-                        <p>Indian Orthodox Church</p>
-                    </div>
-                </div>
-                <div class="mini-sections-heritage">
-                    <div class="heritage-card"></div>
-                    <div class="heritage-card"></div>
-                    <div class="heritage-card"></div>
-                </div>
-                <div class="chatbot-indicator">Member Services</div>
-            </div>
-            <div class="option-info">
-                <h3>Option 4: Mosaic Inspired</h3>
-                <ul>
-                    <li><strong>Style:</strong> Professional, modern church design</li>
-                    <li><strong>Colors:</strong> Mauve/rose (#bb5f84), teal (#67928e), charcoal</li>
-                    <li><strong>Layout:</strong> Mosaic VA inspired, icon grids, rounded cards</li>
-                    <li><strong>Features:</strong> Inter 900 headings, Open Sans body, clean sections</li>
-                    <li><strong>Best for:</strong> Professional congregation seeking polished design</li>
-                </ul>
-                <button class="view-btn" onclick="showDesign('heritage')">View Full Design</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Full Design Previews (Hidden initially) -->
-    <div id="design-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal()">&times;</span>
-            <iframe id="design-frame" src=""></iframe>
-        </div>
-    </div>
-
-    <div class="committee-notes">
-        <h2>Committee Review Notes</h2>
-        <div class="notes-grid">
-            <div class="note-section">
-                <h3>Chatbot Integration</h3>
-                <p>All designs include a chatbot feature for member lookup by car plate number. The chatbot position and style varies by design option.</p>
-            </div>
-            <div class="note-section">
-                <h3>Mobile Responsive</h3>
-                <p>All designs are fully mobile-responsive and optimized for smartphones and tablets.</p>
-            </div>
-            <div class="note-section">
-                <h3>Performance</h3>
-                <p>Each design meets the requirement: page load &lt; 3s, Lighthouse score &gt; 90.</p>
-            </div>
-            <div class="note-section">
-                <h3>Next Steps</h3>
-                <p>Select your preferred design option. Customizations and refinements can be made after selection.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Direct Links Section -->
-    <div class="direct-links-section">
-        <h2>View Individual Designs in New Tab</h2>
-        <p class="direct-links-description">Open each design in a separate browser tab for full-screen viewing</p>
-        <div class="direct-links-grid">
-            <a href="/designs/classic.html" target="_blank" rel="noopener noreferrer" class="direct-link">
-                <span class="link-icon">🔗</span>
-                <span class="link-title">Classic Elegance</span>
-                <span class="link-url">sjiocwebdesigns.vercel.app/designs/classic</span>
-            </a>
-            <a href="/designs/modern.html" target="_blank" rel="noopener noreferrer" class="direct-link">
-                <span class="link-icon">🔗</span>
-                <span class="link-title">Vibrant Modern</span>
-                <span class="link-url">sjiocwebdesigns.vercel.app/designs/modern</span>
-            </a>
-            <a href="/designs/warm.html" target="_blank" rel="noopener noreferrer" class="direct-link">
-                <span class="link-icon">🔗</span>
-                <span class="link-title">Good Shepherd Inspired</span>
-                <span class="link-url">sjiocwebdesigns.vercel.app/designs/warm</span>
-            </a>
-            <a href="/designs/heritage.html" target="_blank" rel="noopener noreferrer" class="direct-link">
-                <span class="link-icon">🔗</span>
-                <span class="link-title">Mosaic Inspired</span>
-                <span class="link-url">sjiocwebdesigns.vercel.app/designs/heritage</span>
-            </a>
-        </div>
-    </div>
-
-    <script>
-        function showDesign(designType) {
-            const modal = document.getElementById('design-modal');
-            const frame = document.getElementById('design-frame');
-            frame.src = `/designs/${designType}.html`;
-            modal.style.display = 'block';
-        }
-
-        function closeModal() {
-            const modal = document.getElementById('design-modal');
-            const frame = document.getElementById('design-frame');
-            modal.style.display = 'none';
-            frame.src = '';
-        }
-
-        // Close modal on outside click
-        window.onclick = function(event) {
-            const modal = document.getElementById('design-modal');
-            if (event.target == modal) {
-                closeModal();
-            }
-        }
-    </script>
 </body>
 </html>
