@@ -14,14 +14,14 @@
                     if (data.maintenance === true) {
                         window.location.replace('/maintenance.html');
                     } else {
-                        // Redirect to the Modern design
-                        window.location.replace('/designs/modern.html');
+                        // Redirect to the Good Shepherd Inspired design
+                        window.location.replace('/designs/warm.html');
                     }
                 })
                 .catch(err => {
                     console.error('Maintenance check failed:', err);
-                    // On error, still redirect to Modern design
-                    window.location.replace('/designs/modern.html');
+                    // On error, still redirect to Good Shepherd Inspired design
+                    window.location.replace('/designs/warm.html');
                 });
         })();
     </script>
